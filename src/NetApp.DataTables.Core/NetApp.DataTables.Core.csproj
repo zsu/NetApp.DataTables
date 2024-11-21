@@ -5,14 +5,14 @@
     <Copyright>2024 Zhicheng Su</Copyright>
     <AssemblyTitle>NetApp.DataTables</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionPrefix>1.0.1</VersionPrefix>
     <Authors>Zhicheng Su</Authors>
     <AssemblyName>NetApp.DataTables.Core</AssemblyName>
     <PackageId>NetApp.DataTables.Core</PackageId>
     <PackageTags>DataTables;Asp.net;Asp.net Core</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Avaruz/datatables.aspnet</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/zsu/NetApp.DataTables</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/zsu/NetApp.DataTables</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
