@@ -27,7 +27,7 @@ THE SOFTWARE.
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
-    /// Represents tests for DataTables.AspNet.AspNet5 naming conventions.
+    /// Represents tests forNetApp.DataTables.AspNet5 naming conventions.
     /// </summary>
     [TestClass]
     public class NameConventionTests

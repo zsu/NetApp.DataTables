@@ -29,7 +29,7 @@ using System.Collections.Generic;
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
-    /// Represents tests for DataTables.AspNet.AspNet5 'DataTablesResponse' class.
+    /// Represents tests forNetApp.DataTables.AspNet5 'DataTablesResponse' class.
     /// </summary>
     [TestClass]
     public class DataTablesResponseTests

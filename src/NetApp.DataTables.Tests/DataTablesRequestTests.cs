@@ -29,7 +29,7 @@ using System.Linq;
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
-    /// Represents tests for DataTables.AspNet.AspNet5 'DataTablesRequest' class.
+    /// Represents tests forNetApp.DataTables.AspNet5 'DataTablesRequest' class.
     /// </summary>
     [TestClass]
     public class DataTablesRequestTests

@@ -30,7 +30,7 @@ using NetApp.DataTables.NameConvention;
 namespace NetApp.DataTables
 {
     /// <summary>
-    /// Represents a configuration object for DataTables.AspNet.
+    /// Represents a configuration object forNetApp.DataTables.
     /// </summary>
     public class Options : IOptions
     {
@@ -87,7 +87,7 @@ namespace NetApp.DataTables
         public IOptions DisableDrawValidation() { IsDrawValidationEnabled = false; return this; }
         /// <summary>
         /// Enables parsing request aditional parameters.
-        /// You must provide your own function for request adicional parameter resolution on DataTables.AspNet registration.
+        /// You must provide your own function for request adicional parameter resolution onNetApp.DataTables registration.
         /// </summary>
         /// <returns></returns>
         public IOptions EnableRequestAdditionalParameters() { IsRequestAdditionalParametersEnabled = true; return this; }

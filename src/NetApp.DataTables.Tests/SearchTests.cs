@@ -27,7 +27,7 @@ THE SOFTWARE.
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
-    /// Represents tests for DataTables.AspNet.AspNet5 'Searc' class.
+    /// Represents tests forNetApp.DataTables.AspNet5 'Searc' class.
     /// </summary>
     [TestClass]
     public class SearchTests

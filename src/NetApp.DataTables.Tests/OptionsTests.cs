@@ -28,7 +28,7 @@ THE SOFTWARE.
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
-    /// Represents tests for DataTables.AspNet.AspNet5 'Options' class.
+    /// Represents tests forNetApp.DataTables.AspNet5 'Options' class.
     /// </summary>
     [TestClass]
     public class OptionsTests
