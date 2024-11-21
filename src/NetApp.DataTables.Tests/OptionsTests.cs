@@ -23,39 +23,40 @@ THE SOFTWARE.
 */
 #endregion Copyright
 
-using Xunit;
+
 
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
     /// Represents tests for DataTables.AspNet.AspNet5 'Options' class.
     /// </summary>
+    [TestClass]
     public class OptionsTests
     {
         /// <summary>
         /// Validates default configuration options.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DefaultConfiguration()
         {
             // Arrange
             var options = TestHelper.MockOptions();
 
             // Assert
-            Assert.NotNull(options);
-            Assert.Equal(10, options.DefaultPageLength);
-            Assert.Equal(false, options.IsRequestAdditionalParametersEnabled);
-            Assert.Equal(false, options.IsResponseAdditionalParametersEnabled);
-            Assert.Equal(true, options.IsDrawValidationEnabled);
-            Assert.Equal(new NameConvention.CamelCaseRequestNameConvention().Draw, options.RequestNameConvention.Draw);
-            Assert.Equal(new NameConvention.CamelCaseResponseNameConvention().Draw, options.ResponseNameConvention.Draw);
-            Assert.Equal("asc", options.RequestNameConvention.SortAscending);
-            Assert.Equal("desc", options.RequestNameConvention.SortDescending);
+            Assert.IsNotNull(options);
+            Assert.AreEqual(10, options.DefaultPageLength);
+            Assert.AreEqual(false, options.IsRequestAdditionalParametersEnabled);
+            Assert.AreEqual(false, options.IsResponseAdditionalParametersEnabled);
+            Assert.AreEqual(true, options.IsDrawValidationEnabled);
+            Assert.AreEqual(new NameConvention.CamelCaseRequestNameConvention().Draw, options.RequestNameConvention.Draw);
+            Assert.AreEqual(new NameConvention.CamelCaseResponseNameConvention().Draw, options.ResponseNameConvention.Draw);
+            Assert.AreEqual("asc", options.RequestNameConvention.SortAscending);
+            Assert.AreEqual("desc", options.RequestNameConvention.SortDescending);
         }
         /// <summary>
         /// Validates switching name convention to HungarianNotation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SwitchHungarianNotation()
         {
             // Arrange
@@ -65,13 +66,13 @@ namespace NetApp.DataTables.Tests
             options.UseHungarianNotation();
 
             // Assert
-            Assert.Equal(new NameConvention.HungarianNotationRequestNameConvention().Draw, options.RequestNameConvention.Draw);
-            Assert.Equal(new NameConvention.HungarianNotationResponseNameConvention().Draw, options.ResponseNameConvention.Draw);
+            Assert.AreEqual(new NameConvention.HungarianNotationRequestNameConvention().Draw, options.RequestNameConvention.Draw);
+            Assert.AreEqual(new NameConvention.HungarianNotationResponseNameConvention().Draw, options.ResponseNameConvention.Draw);
         }
         /// <summary>
         /// Validates switching name convention to CamelCase.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SwitchCamelCase()
         {
             // Arrange
@@ -81,13 +82,13 @@ namespace NetApp.DataTables.Tests
             options.UseHungarianNotation().UseCamelCase();
 
             // Assert
-            Assert.Equal(new NameConvention.CamelCaseRequestNameConvention().Draw, options.RequestNameConvention.Draw);
-            Assert.Equal(new NameConvention.CamelCaseResponseNameConvention().Draw, options.ResponseNameConvention.Draw);
+            Assert.AreEqual(new NameConvention.CamelCaseRequestNameConvention().Draw, options.RequestNameConvention.Draw);
+            Assert.AreEqual(new NameConvention.CamelCaseResponseNameConvention().Draw, options.ResponseNameConvention.Draw);
         }
         /// <summary>
         /// Validates disabling request draw validation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DisableDrawValidation()
         {
             // Arrange
@@ -97,12 +98,12 @@ namespace NetApp.DataTables.Tests
             options.DisableDrawValidation();
 
             // Assert
-            Assert.Equal(false, options.IsDrawValidationEnabled);
+            Assert.AreEqual(false, options.IsDrawValidationEnabled);
         }
         /// <summary>
         /// Validates enabling request draw validation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnableDrawValidation()
         {
             // Arrange
@@ -112,12 +113,12 @@ namespace NetApp.DataTables.Tests
             options.DisableDrawValidation().EnableDrawValidation();
 
             // Assert
-            Assert.Equal(true, options.IsDrawValidationEnabled);
+            Assert.AreEqual(true, options.IsDrawValidationEnabled);
         }
         /// <summary>
         /// Validates enabling aditional parameters verification.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void EnableAditionalParameters()
         {
             // Arrange
@@ -128,13 +129,13 @@ namespace NetApp.DataTables.Tests
             options.EnableResponseAdditionalParameters();
 
             // Assert
-            Assert.Equal(true, options.IsRequestAdditionalParametersEnabled);
-            Assert.Equal(true, options.IsResponseAdditionalParametersEnabled);
+            Assert.AreEqual(true, options.IsRequestAdditionalParametersEnabled);
+            Assert.AreEqual(true, options.IsResponseAdditionalParametersEnabled);
         }
         /// <summary>
         /// Validates disabling aditional parameters verification.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DisableAditionalParameters()
         {
             // Arrange
@@ -145,13 +146,13 @@ namespace NetApp.DataTables.Tests
             options.EnableResponseAdditionalParameters().DisableResponseAdditionalParameters();
 
             // Assert
-            Assert.Equal(false, options.IsRequestAdditionalParametersEnabled);
-            Assert.Equal(false, options.IsResponseAdditionalParametersEnabled);
+            Assert.AreEqual(false, options.IsRequestAdditionalParametersEnabled);
+            Assert.AreEqual(false, options.IsResponseAdditionalParametersEnabled);
         }
         /// <summary>
         /// Validates changing default page length.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ChangeDefaultPageLength()
         {
             // Arrange
@@ -161,7 +162,7 @@ namespace NetApp.DataTables.Tests
             options.SetDefaultPageLength(123);
 
             // Assert
-            Assert.Equal(123, options.DefaultPageLength);
+            Assert.AreEqual(123, options.DefaultPageLength);
         }
     }
 }

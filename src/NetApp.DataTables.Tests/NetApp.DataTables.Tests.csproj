@@ -1,30 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Test suite for NetApp.DataTables.Tests</Description>
-    <AssemblyTitle>NetApp.DataTables.Tests</AssemblyTitle>
-    <VersionPrefix>2.0.2</VersionPrefix>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>NetApp.DataTables.Tests</AssemblyName>
-    <PackageId>NetApp.DataTables.Tests</PackageId>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="Moq" Version="4.20.72" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="xunit" Version="2.9.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="MSTest" Version="3.6.3" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\NetApp.DataTables.Core\NetApp.DataTables.Core.csproj" />
     <ProjectReference Include="..\NetApp.DataTables\NetApp.DataTables.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
 </Project>

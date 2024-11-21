@@ -23,36 +23,36 @@ THE SOFTWARE.
 */
 #endregion Copyright
 
-using Xunit;
 
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
     /// Represents tests for DataTables.AspNet.AspNet5 'Searc' class.
     /// </summary>
+    [TestClass]
     public class SearchTests
     {
         /// <summary>
         /// Validates search creation without data field.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SearchCreationWithoutField()
         {
             var search = TestHelper.MockSearch("searchValue", true);
 
-            Assert.Equal("searchValue", search.Value);
-            Assert.Equal(true, search.IsRegex);
+            Assert.AreEqual("searchValue", search.Value);
+            Assert.AreEqual(true, search.IsRegex);
         }
         /// <summary>
         /// Validates search creation with data field.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void SearchCreationWithField()
         {
             var search = TestHelper.MockSearch("searchValue", true);
 
-            Assert.Equal("searchValue", search.Value);
-            Assert.Equal(true, search.IsRegex);
+            Assert.AreEqual("searchValue", search.Value);
+            Assert.AreEqual(true, search.IsRegex);
         }
     }
 }

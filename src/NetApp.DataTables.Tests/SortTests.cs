@@ -23,16 +23,17 @@ THE SOFTWARE.
 */
 #endregion Copyright
 
-using Xunit;
+
 
 namespace NetApp.DataTables.Tests
 {
+    [TestClass]
     public class SortTests
     {
         /// <summary>
         /// Validates ascending sort creation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void AscendingSortCreation()
         {
             // Arrange
@@ -40,13 +41,13 @@ namespace NetApp.DataTables.Tests
             var sort = TestHelper.MockSort(9, options.RequestNameConvention.SortAscending);
 
             // Assert
-            Assert.Equal(9, sort.Order);
-            Assert.Equal(Core.SortDirection.Ascending, sort.Direction);
+            Assert.AreEqual(9, sort.Order);
+            Assert.AreEqual(Core.SortDirection.Ascending, sort.Direction);
         }
         /// <summary>
         /// Validates descending sort creation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void DescendingSortCreation()
         {
             // Arrange
@@ -54,8 +55,8 @@ namespace NetApp.DataTables.Tests
             var sort = TestHelper.MockSort(9, options.RequestNameConvention.SortDescending);
 
             // Assert
-            Assert.Equal(9, sort.Order);
-            Assert.Equal(Core.SortDirection.Descending, sort.Direction);
+            Assert.AreEqual(9, sort.Order);
+            Assert.AreEqual(Core.SortDirection.Descending, sort.Direction);
         }
     }
 }

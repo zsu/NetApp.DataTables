@@ -23,17 +23,15 @@ THE SOFTWARE.
 */
 #endregion Copyright
 
-using System.Collections.Generic;
-using Xunit;
-
 namespace NetApp.DataTables.Tests
 {
+    [TestClass]
     public class DataTablesExtensionsTests
     {
         /// <summary>
         /// Validates error response creation without aditional parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorResponseWithoutAditionalParameters()
         {
             // Arrange
@@ -43,12 +41,12 @@ namespace NetApp.DataTables.Tests
             var response = request.CreateResponse("just_some_error_message");
 
             // Assert
-            Assert.NotNull(response);
+            Assert.IsNotNull(response);
         }
         /// <summary>
         /// Validates error response creation with aditional parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorResponseWithAditionalParameters()
         {
             // Arrange
@@ -59,12 +57,12 @@ namespace NetApp.DataTables.Tests
             var response = request.CreateResponse("just_some_error_message", aditionalParameters);
 
             // Assert
-            Assert.NotNull(response);
+            Assert.IsNotNull(response);
         }
         /// <summary>
         /// Validates response creation without aditional parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResponseWithoutAditionalParameters()
         {
             // Arrange
@@ -75,12 +73,12 @@ namespace NetApp.DataTables.Tests
             var response = request.CreateResponse(2000, 1000, data);
 
             // Assert
-            Assert.NotNull(response);
+            Assert.IsNotNull(response);
         }
         /// <summary>
         /// Validates response creation with aditional parameters dictionary.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResponseWithAditionalParameters()
         {
             // Arrange
@@ -92,12 +90,12 @@ namespace NetApp.DataTables.Tests
             var response = request.CreateResponse(2000, 1000, data, aditionalParameters);
 
             // Assert
-            Assert.NotNull(response);
+            Assert.IsNotNull(response);
         }
         /// <summary>
         /// Validates response response creation for invalid (null) request.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void NullRequestResponseCreation()
         {
             // Arrange
@@ -107,13 +105,13 @@ namespace NetApp.DataTables.Tests
             var response = request.CreateResponse("just_some_error_message");
 
             // Assert
-            Assert.Null(response);
+            Assert.IsNull(response);
         }
         /// <summary>
         /// This test must be executed alone.
         /// Validates response creation for request with invalid draw value and draw validtion enabled.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidDrawResponseCreationWithDrawValidation()
         {
             // Arrange
@@ -125,13 +123,13 @@ namespace NetApp.DataTables.Tests
             var response = request.CreateResponse(2000, 1000, data);
 
             // Assert
-            Assert.Null(response);
+            Assert.IsNull(response);
         }
         /// <summary>
         /// This test must be executed alone.
         /// Validates response creation for request with invalid draw value and without draw validtion enabled.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void InvalidDrawResponseCreationWithoutDrawValidation()
         {
             // Arrange
@@ -143,7 +141,7 @@ namespace NetApp.DataTables.Tests
             var response = request.CreateResponse(2000, 1000, data);
 
             // Assert
-            Assert.NotNull(response);
+            Assert.IsNotNull(response);
         }
     }
 }

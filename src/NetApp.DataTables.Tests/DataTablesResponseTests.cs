@@ -25,19 +25,19 @@ THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using Xunit;
 
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
     /// Represents tests for DataTables.AspNet.AspNet5 'DataTablesResponse' class.
     /// </summary>
+    [TestClass]
     public class DataTablesResponseTests
     {
         /// <summary>
         /// Validates error response creation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorResponse()
         {
             // Arrange
@@ -47,17 +47,17 @@ namespace NetApp.DataTables.Tests
             var response = DataTablesResponse.Create(request, "just_an_error_message");
 
             // Assert
-            Assert.Equal(request.Draw, response.Draw);
-            Assert.Equal("just_an_error_message", response.Error);
-            Assert.Equal(0, response.TotalRecords);
-            Assert.Equal(0, response.TotalRecordsFiltered);
-            Assert.Null(response.Data);
-            Assert.Null(response.AdditionalParameters);
+            Assert.AreEqual(request.Draw, response.Draw);
+            Assert.AreEqual("just_an_error_message", response.Error);
+            Assert.AreEqual(0, response.TotalRecords);
+            Assert.AreEqual(0, response.TotalRecordsFiltered);
+            Assert.IsNull(response.Data);
+            Assert.IsNull(response.AdditionalParameters);
         }
         /// <summary>
         /// Validates response creation without aditional parameters dictionary.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResponseWithoutAditionalParameters()
         {
             // Arrange
@@ -68,17 +68,17 @@ namespace NetApp.DataTables.Tests
             var response = DataTablesResponse.Create(request, 2000, 1000, data);
 
             // Assert
-            Assert.Equal(request.Draw, response.Draw);
-            Assert.Null(response.Error);
-            Assert.Equal(2000, response.TotalRecords);
-            Assert.Equal(1000, response.TotalRecordsFiltered);
-            Assert.Equal(data, response.Data);
-            Assert.Null(response.AdditionalParameters);
+            Assert.AreEqual(request.Draw, response.Draw);
+            Assert.IsNull(response.Error);
+            Assert.AreEqual(2000, response.TotalRecords);
+            Assert.AreEqual(1000, response.TotalRecordsFiltered);
+            Assert.AreEqual(data, response.Data);
+            Assert.IsNull(response.AdditionalParameters);
         }
         /// <summary>
         /// Validates response creation with aditional parameters dictionary.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResponseWithAditionalParameters()
         {
             // Arrange
@@ -90,17 +90,17 @@ namespace NetApp.DataTables.Tests
             var response = DataTablesResponse.Create(request, 2000, 1000, data, aditionalParameters);
 
             // Assert
-            Assert.Equal(request.Draw, response.Draw);
-            Assert.Null(response.Error);
-            Assert.Equal(2000, response.TotalRecords);
-            Assert.Equal(1000, response.TotalRecordsFiltered);
-            Assert.Equal(data, response.Data);
-            Assert.Equal(aditionalParameters, response.AdditionalParameters);
+            Assert.AreEqual(request.Draw, response.Draw);
+            Assert.IsNull(response.Error);
+            Assert.AreEqual(2000, response.TotalRecords);
+            Assert.AreEqual(1000, response.TotalRecordsFiltered);
+            Assert.AreEqual(data, response.Data);
+            Assert.AreEqual(aditionalParameters, response.AdditionalParameters);
         }
         /// <summary>
         /// Validates error response serialization.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorResponseSerializationWithoutAditionalParameters()
         {
             // Arrange
@@ -112,14 +112,15 @@ namespace NetApp.DataTables.Tests
             var response = DataTablesResponse.Create(request, "just_an_error_message");
 
             // Assert
-            Assert.Equal(expectedJson, response.ToString());
+            Assert.AreEqual(expectedJson, response.ToString());
         }
         /// <summary>
         /// Validates error response serialization.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ErrorResponseSerializationWithAditionalParameters()
         {
+            Configuration.Options.EnableResponseAdditionalParameters();
             // Arrange
             var request = TestHelper.MockDataTablesRequest(3, 13, 99, null, null);
             var names = new NameConvention.CamelCaseResponseNameConvention();
@@ -130,12 +131,12 @@ namespace NetApp.DataTables.Tests
             var response = DataTablesResponse.Create(request, "just_an_error_message", aditionalParameters);
 
             // Assert
-            Assert.Equal(expectedJson, response.ToString());
+            Assert.AreEqual(expectedJson, response.ToString());
         }
         /// <summary>
         /// Validates response serialization without aditional parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResponseSerializationWithoutAditionalParameters()
         {
             // Arrange
@@ -153,12 +154,12 @@ namespace NetApp.DataTables.Tests
             var response = DataTablesResponse.Create(request, 2000, 1000, data);
 
             // Assert
-            Assert.Equal(expectedJson, response.ToString());
+            Assert.AreEqual(expectedJson, response.ToString());
         }
         /// <summary>
         /// Validates response serialization without aditional parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void ResponseSerializationWithAditionalParameters()
         {
             // Arrange
@@ -178,7 +179,7 @@ namespace NetApp.DataTables.Tests
             var response = DataTablesResponse.Create(request, 2000, 1000, data, aditionalParameters);
 
             // Assert
-            Assert.Equal(expectedJson, response.ToString());
+            Assert.AreEqual(expectedJson, response.ToString());
         }
     }
 }

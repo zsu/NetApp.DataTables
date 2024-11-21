@@ -26,6 +26,7 @@ THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 
 namespace NetApp.DataTables
@@ -71,72 +72,60 @@ namespace NetApp.DataTables
         /// <returns></returns>
         public override string ToString()
         {
-            using (var stringWriter = new System.IO.MemoryStream())
-            using (var jsonWriter = new Utf8JsonWriter(stringWriter))
+
+
+            using var memoryStream = new MemoryStream();
+            using var jsonWriter = new Utf8JsonWriter(memoryStream);
+
+            if (IsSuccessResponse())
             {
-                if (IsSuccessResponse())
+                jsonWriter.WriteStartObject();
+                jsonWriter.WriteNumber(Configuration.Options.ResponseNameConvention.Draw, Draw);
+                jsonWriter.WriteNumber(Configuration.Options.ResponseNameConvention.TotalRecords, TotalRecords);
+                jsonWriter.WriteNumber(Configuration.Options.ResponseNameConvention.TotalRecordsFiltered, TotalRecordsFiltered);
+
+                // Write data as raw JSON
+                jsonWriter.WritePropertyName(Configuration.Options.ResponseNameConvention.Data);
+                var dataJson = SerializeData(Data);
+                using (var doc = JsonDocument.Parse(dataJson))
                 {
-                    // Start json object.
-                    jsonWriter.WriteStartObject();
-
-                    // Draw
-                    jsonWriter.WritePropertyName(Configuration.Options.ResponseNameConvention.Draw);
-                    jsonWriter.WriteNumberValue(Draw);
-
-                    // TotalRecords
-                    jsonWriter.WritePropertyName(Configuration.Options.ResponseNameConvention.TotalRecords);
-                    jsonWriter.WriteNumberValue(TotalRecords);
-
-                    // TotalRecordsFiltered
-                    jsonWriter.WritePropertyName(Configuration.Options.ResponseNameConvention.TotalRecordsFiltered);
-                    jsonWriter.WriteNumberValue(TotalRecordsFiltered);
-
-                    // Data
-                    jsonWriter.WritePropertyName(Configuration.Options.ResponseNameConvention.Data);
-                    jsonWriter.WriteRawValue(SerializeData(Data));
-
-                    // AdditionalParameters
-                    if (NetApp.DataTables.Configuration.Options.IsResponseAdditionalParametersEnabled && AdditionalParameters != null)
-                    {
-                        foreach (var keypair in AdditionalParameters)
-                        {
-                            jsonWriter.WriteString(keypair.Key, JsonSerializer.Serialize(keypair.Value));
-                        }
-                    }
-
-                    // End json object
-                    jsonWriter.WriteEndObject();
-                }
-                else
-                {
-                    // Start json object.
-                    jsonWriter.WriteStartObject();
-
-                    // Draw
-                    jsonWriter.WritePropertyName(Configuration.Options.ResponseNameConvention.Draw);
-                    jsonWriter.WriteNumberValue(Draw);
-
-                    // Error
-                    jsonWriter.WritePropertyName(Configuration.Options.ResponseNameConvention.Error);
-                    jsonWriter.WriteStringValue(Error);
-
-                    // AdditionalParameters
-                    if (NetApp.DataTables.Configuration.Options.IsResponseAdditionalParametersEnabled && AdditionalParameters != null)
-                    {
-                        foreach (var keypair in AdditionalParameters)
-                        {
-                            jsonWriter.WriteString(keypair.Key, JsonSerializer.Serialize(keypair.Value));
-                        }
-                    }
-
-                    // End json object
-                    jsonWriter.WriteEndObject();
+                    doc.RootElement.WriteTo(jsonWriter);
                 }
 
-                jsonWriter.Flush();
+                // Handle additional parameters
+                if (Configuration.Options.IsResponseAdditionalParametersEnabled && AdditionalParameters != null)
+                {
+                    foreach (var pair in AdditionalParameters)
+                    {
+                        jsonWriter.WritePropertyName(pair.Key);
+                        using var doc = JsonDocument.Parse(JsonSerializer.Serialize(pair.Value));
+                        doc.RootElement.WriteTo(jsonWriter);
+                    }
+                }
 
-                return System.Text.Encoding.UTF8.GetString(stringWriter.ToArray());
+                jsonWriter.WriteEndObject();
             }
+            else
+            {
+                jsonWriter.WriteStartObject();
+                jsonWriter.WriteNumber(Configuration.Options.ResponseNameConvention.Draw, Draw);
+                jsonWriter.WriteString(Configuration.Options.ResponseNameConvention.Error, Error);
+
+                if (Configuration.Options.IsResponseAdditionalParametersEnabled && AdditionalParameters != null)
+                {
+                    foreach (var pair in AdditionalParameters)
+                    {
+                        jsonWriter.WritePropertyName(pair.Key);
+                        using var doc = JsonDocument.Parse(JsonSerializer.Serialize(pair.Value));
+                        doc.RootElement.WriteTo(jsonWriter);
+                    }
+                }
+
+                jsonWriter.WriteEndObject();
+            }
+
+            jsonWriter.Flush();
+            return Encoding.UTF8.GetString(memoryStream.ToArray());
         }
         /// <summary>
         /// For private use only.

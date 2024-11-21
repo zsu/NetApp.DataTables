@@ -25,19 +25,19 @@ THE SOFTWARE.
 
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 
 namespace NetApp.DataTables.Tests
 {
     /// <summary>
     /// Represents tests for DataTables.AspNet.AspNet5 'DataTablesRequest' class.
     /// </summary>
+    [TestClass]
     public class DataTablesRequestTests
     {
         /// <summary>
         /// Validates standard (complete) request creation.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RequestCreation()
         {
             // Arrange
@@ -46,32 +46,32 @@ namespace NetApp.DataTables.Tests
             var request = TestHelper.MockDataTablesRequest(3, 13, 99, search, columns);
 
             // Assert
-            Assert.Equal(3, request.Draw);
-            Assert.Equal(13, request.Start);
-            Assert.Equal(99, request.Length);
+            Assert.AreEqual(3, request.Draw);
+            Assert.AreEqual(13, request.Start);
+            Assert.AreEqual(99, request.Length);
 
-            Assert.Equal("searchValue", request.Search.Value);
-            Assert.Equal(true, request.Search.IsRegex);
+            Assert.AreEqual("searchValue", request.Search.Value);
+            Assert.AreEqual(true, request.Search.IsRegex);
 
-            Assert.Equal(3, request.Columns.Count());
-            foreach (var column in request.Columns) Assert.NotNull(column);
+            Assert.AreEqual(3, request.Columns.Count());
+            foreach (var column in request.Columns) Assert.IsNotNull(column);
         }
         /// <summary>
         /// Validares request creation with aditional parameters.
         /// </summary>
-        [Fact]
+        [TestMethod]
         public void RequestWithAditionalParameters()
         {
             // Arrange
             var search = TestHelper.MockSearch("searchValue", true);
             var columns = TestHelper.MockColumns();
-            var aditionalParameters = TestHelper.MockAdditionalParameters(); 
+            var aditionalParameters = TestHelper.MockAdditionalParameters();
             var request = TestHelper.MockDataTablesRequest(3, 13, 99, search, columns, aditionalParameters);
 
             // Assert
-            Assert.Equal(2, request.AdditionalParameters.Count);
-            Assert.Equal("firstValue", request.AdditionalParameters["firstParameter"]);
-            Assert.Equal(7, request.AdditionalParameters["secondParameter"]);
+            Assert.AreEqual(2, request.AdditionalParameters.Count);
+            Assert.AreEqual("firstValue", request.AdditionalParameters["firstParameter"]);
+            Assert.AreEqual(7, request.AdditionalParameters["secondParameter"]);
         }
     }
 }

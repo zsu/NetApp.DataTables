@@ -35,103 +35,61 @@ namespace NetApp.DataTables.Tests
     /// <summary>
     /// Provides arrange methods and helpers to execute unit tests.
     /// </summary>
+    [TestClass]
     public static class TestHelper
     {
+        [TestMethod]
         public static Core.IColumn MockColumn(string columnName, string columnField, bool searchable, bool sortable)
         { return new Column(columnName, columnField, searchable, sortable, null); }
+
+        [TestMethod]
         public static Core.IColumn MockColumn(string columnName, string columnField, bool searchable, bool sortable, string searchValue, bool searchRegex)
         { return new Column(columnName, columnField, searchable, sortable, new Search(searchValue, searchRegex)); }
+
+        [TestMethod]
         public static Core.IOptions MockOptions()
         { return new Options(); }
+
+        [TestMethod]
         public static ModelBinder MockModelBinder()
         { return new ModelBinder(); }
+
+        [TestMethod]
         public static Core.IDataTablesRequest MockDataTablesRequest(int draw, int start, int length, Core.ISearch search, IEnumerable<Core.IColumn> columns)
         { return MockDataTablesRequest(draw, start, length, search, columns, null); }
+
+        [TestMethod]
         public static Core.IDataTablesRequest MockDataTablesRequest(int draw, int start, int length, Core.ISearch search, IEnumerable<Core.IColumn> columns, IDictionary<string, object> additionalParameters)
         { return new DataTablesRequest(draw, start, length, search, columns, additionalParameters); }
+
+        [TestMethod]
         public static System.Collections.IEnumerable MockData()
         { return new string[] { "firstElement", "secondElement", "thirdElement" }; }
+
+        [TestMethod]
         public static IDictionary<string, object> MockAdditionalParameters()
         { return new Dictionary<string, object>() { { "firstParameter", "firstValue" }, { "secondParameter", 7 } }; }
+
+        [TestMethod]
         public static Core.ISearch MockSearch(string searchValue, bool isRegex)
         { return new Search(searchValue, isRegex); }
+
+        [TestMethod]
         public static Core.ISort MockSort(int order, string direction)
         { return new Sort(order, direction); }
+
+        [TestMethod]
         public static IEnumerable<Core.IColumn> MockColumns()
-        { 
+        {
             return new Column[]
             {
-                new Column("column0_name", "column0_field", true, true, MockSearch("column0_search_value", true)),
-                new Column("column1_name", "column1_field", true, false, MockSearch("column1_search_value", false)),
-                new Column("column2_name", "column2_field", false, true, MockSearch("column2_search_value", true)),
+                        new Column("column0_name", "column0_field", true, true, MockSearch("column0_search_value", true)),
+                        new Column("column1_name", "column1_field", true, false, MockSearch("column1_search_value", false)),
+                        new Column("column2_name", "column2_field", false, true, MockSearch("column2_search_value", true)),
             };
         }
-        //public static ModelBindingContext MockModelBindingContextWithCamelCase(string draw, string length, string start, string searchValue, string searchRegex)
-        //{ return MockModelBindingContextWithCamelCase(draw, length, start, searchValue, searchRegex, null); }
-        //public static ModelBindingContext MockModelBindingContextWithCamelCase(string draw, string length, string start, string searchValue, string searchRegex, IDictionary<string, object> additionalParameters)
-        //{ return MockModelBindingContext(draw, length, start, searchValue, searchRegex, additionalParameters, new NameConvention.CamelCaseRequestNameConvention()); }
-        //public static ModelBindingContext MockModelBindingContextWithHungarianNotation(string draw, string length, string start, string searchValue, string searchRegex)
-        //{ return MockModelBindingContextWithHungarianNotation(draw, length, start, searchValue, searchRegex, null); }
-        //public static ModelBindingContext MockModelBindingContextWithHungarianNotation(string draw, string length, string start, string searchValue, string searchRegex, IDictionary<string, object> additionalParameters)
-        //{ return MockModelBindingContext(draw, length, start, searchValue, searchRegex, additionalParameters, new NameConvention.HungarianNotationRequestNameConvention()); }
-        //public static ModelBindingContext MockModelBindingContext(string draw, string length, string start, string searchValue, string searchRegex, IDictionary<string, object> additionalParameters, Core.NameConvention.IRequestNameConvention requestNameConvention)
-        //{
-        //    // Request properties.
-        //    var formCollection = new Dictionary<string, StringValues>()
-        //    {
-        //        { requestNameConvention.Length, length },
-        //        { requestNameConvention.Start, start },
-        //        { requestNameConvention.SearchValue, searchValue },
-        //        { requestNameConvention.IsSearchRegex, searchRegex }
-        //    };
-        //    if (!String.IsNullOrWhiteSpace(draw)) formCollection.Add(requestNameConvention.Draw, draw);
 
-        //    // Aditional parameters.
-        //    if (additionalParameters != null)
-        //    {
-        //        foreach (var keypair in additionalParameters)
-        //        {
-        //            formCollection.Add(keypair.Key, Convert.ToString(keypair.Value));
-        //        }
-        //    }
-
-        //    // Value provider for request properties.
-        //    var valueProvider = new FormValueProvider(new BindingSource("a", "a", false, true), new FormCollection(formCollection), new System.Globalization.CultureInfo("en-US"));
-
-
-        //    // Model metadata.
-        //    var x = new Microsoft.AspNetCore.Mvc.Internal.DefaultCompositeMetadataDetailsProvider(null);
-        //    var modelMetadata = new Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider(x).GetMetadataForType(typeof(Core.IDataTablesRequest));
-        //    //var modelMetadata = new Microsoft.AspNet.Mvc.ModelBinding.Metadata. ModelMetadataProviders.Current.GetMetadataForType(null, typeof(Core.IDataTablesRequest));
-            
-        //    return new DefaultModelBindingContext()
-        //    {
-        //        ModelName = "moq",
-        //        ValueProvider = valueProvider,
-        //        ModelMetadata = modelMetadata
-        //    };
-        //}        
-        //public static ModelBindingContext MockModelBindingContextWithInvalidRequest()
-        //{
-        //    // Request properties.
-        //    var formCollection = new Dictionary<string, StringValues>();
-
-        //    // Value provider for request properties.
-        //    var valueProvider = new FormValueProvider(new BindingSource("a", "a", false, true), new FormCollection(formCollection), new System.Globalization.CultureInfo("en-US"));
-
-        //    // Model metadata.
-            
-        //    var x = new Microsoft.AspNetCore.Mvc.Internal.DefaultCompositeMetadataDetailsProvider(null);
-        //    var modelMetadata = new Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider(x).GetMetadataForType(typeof(Core.IDataTablesRequest));
-        //    //var modelMetadata = new Microsoft.AspNet.Mvc.ModelBinding.Metadata. ModelMetadataProviders.Current.GetMetadataForType(null, typeof(Core.IDataTablesRequest));
-            
-        //    return new DefaultModelBindingContext()
-        //    {
-        //        ModelName = "moq",
-        //        ValueProvider = valueProvider,
-        //        ModelMetadata = modelMetadata
-        //    };
-        //}
+        [TestMethod]
         public static IDictionary<string, object> ParseAdditionalParameters(ModelBindingContext modelBindingContext)
         {
             var _return = new Dictionary<string, object>();
