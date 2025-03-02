@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch NetApp.DataTables.Test",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/NetApp.DataTables.Tests/bin/Debug/net9.0/NetApp.DataTables.Tests.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/NetApp.DataTables.Tests",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+      }
+    ]
+  }
+  
